@@ -11,7 +11,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iter();
+        return new ListIter();
     }
 
     private class Node<T> {
@@ -47,6 +47,57 @@ public class MyLinkedList<T> implements Iterable<T>  {
         public T next() {
             current = current.next;
             return (T)current.value;
+        }
+    }
+
+    private class ListIter implements ListIterator<T>{
+        Node current = new Node(null,first);
+
+        @Override
+        public boolean hasNext() {
+            return current.next != null;
+        }
+
+        @Override
+        public T next() {
+            current = current.next;
+            return (T)current.value;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current.prev != null;
+        }
+
+        @Override
+        public T previous() {
+            current = current.prev;
+            return (T)current.value;
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T t) {
+
+        }
+
+        @Override
+        public void add(T t) {
+
         }
     }
 
