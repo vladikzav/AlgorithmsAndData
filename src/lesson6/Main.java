@@ -22,11 +22,16 @@ public class Main {
 //        System.out.println(map.isBalanced());
 
         MyTreeMap<Integer, Integer>[] maps = new MyTreeMap[20];
+        int balanced = 0;
         for (int i = 0; i < maps.length; i++) {
             maps[i] = new MyTreeMap<>();
             treeMapFiller(maps[i]);
             System.out.println("Баланс массива "+ (i+1) + ": " +maps[i].isBalanced());
+            if(maps[i].isBalanced())
+                balanced+=1;
+
         }
+        System.out.println("Сбалансированных массивов: " + (balanced*5) + "%");
 
     }
 

@@ -173,7 +173,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         return Math.abs(height(node.left) - height(node.right)) <= 2 && Math.abs(height(node.left) - height(node.right)) >= 0;
     }
 
-    public int height() {
+      public int height() {
         return height(root);
     }
 
