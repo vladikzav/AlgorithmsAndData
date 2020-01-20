@@ -11,11 +11,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         Node left;
         Node right;
         int size;
+        int height;
 
         public Node(Key key, Value value) {
             this.key = key;
             this.value = value;
             this.size = 1;
+            this.height = 0;
         }
     }
 
@@ -85,6 +87,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         } else {
             node.right = put(node.right, key, value);
         }
+        node.height = getHeight(node);
         node.size = size(node.left) + size(node.right) + 1;
         return node;
     }
@@ -112,6 +115,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             return node.right;
         }
         node.left = deleteMin(node.left);
+        node.height = getHeight(node);
         node.size = size(node.left) + size(node.right) + 1;
         return node;
     }
@@ -142,6 +146,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             node.right = deleteMin(tmp.right);
             node.left = tmp.left;
         }
+        node.height = getHeight(node);
         node.size = size(node.left) + size(node.right) + 1;
         return node;
     }
@@ -159,4 +164,35 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
                 + "[" + node.key + "=" + node.value + "], "
                 + toString(node.right);
     }
+
+    public boolean isBalanced(){
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node){
+        return Math.abs(height(node.left) - height(node.right)) <= 2 && Math.abs(height(node.left) - height(node.right)) >= 0;
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node){
+        if (node == null) {
+            return 0;
+        }
+        return node.height;
+    }
+
+    private int getHeight(Node node){
+        if(height(node.left)>=height(node.right)){
+            node.height = height(node.left)+1;
+        }
+        if(height(node.left)<height(node.right)){
+            node.height = height(node.right)+1;
+        }
+        return node.height;
+    }
+
+
 }
